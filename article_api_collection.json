@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+		"name": "Go Post Article API",
+		"description": "Collection untuk manajemen CRUD data artikel dengan backend Golang, Gin Gonic, dan GORM PostgreSQL.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Create Article",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Belajar Pemrograman Golang untuk Pemula dan Backend\",\n  \"content\": \"Ini adalah isi konten artikel yang sengaja ditulis sangat panjang sekali untuk memenuhi batas minimal validasi dari sistem backend sebanyak minimal dua ratus karakter penuh agar tidak terblokir oleh validator global. Semoga bermanfaat!\",\n  \"category\": \"Teknologi\",\n  \"status\": \"Publish\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/article",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"article"
+					]
+				},
+				"description": "Membuat artikel baru ke database. Judul minimal 20 karakter, Konten minimal 200 karakter, Kategori minimal 3 karakter, Status wajib 'Publish', 'Draft', atau 'Thrash'."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Get All Articles (with Paging)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/article?limit=5&offset=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"article"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5",
+							"description": "Jumlah maksimal data yang ditarik"
+						},
+						{
+							"key": "offset",
+							"value": "0",
+							"description": "Titik mulai pengambilan data (skip sejumlah offset)"
+						}
+					]
+				},
+				"description": "Menampilkan seluruh daftar artikel dari database dengan dukungan pagination menggunakan parameter query 'limit' dan 'offset'."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get Article By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"article",
+						"1"
+					]
+				},
+				"description": "Menampilkan data satu artikel secara spesifik berdasarkan parameter ID yang dikirim pada URL."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Update Article By ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Perubahan Judul Artikel Terbaru Yang Lebih Menarik\",\n  \"content\": \"Ini adalah isi konten artikel perubahan yang juga sengaja ditulis sangat panjang sekali untuk memenuhi batas minimal validasi dari sistem backend sebanyak minimal dua ratus karakter penuh agar tidak terjadi error validasi.\",\n  \"category\": \"Edukasi Bisnis\",\n  \"status\": \"Draft\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"article",
+						"1"
+					]
+				},
+				"description": "Mengubah data artikel berdasarkan ID. Input data baru wajib lolos validasi karakter yang sama dengan skema Create."
+			},
+			"response": []
+		},
+		{
+			"name": "5. Delete Article By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"article",
+						"1"
+					]
+				},
+				"description": "Menghapus data artikel secara permanen (Hard Delete) berdasarkan parameter ID yang dikirim pada URL."
+			},
+			"response": []
+		}
+	]
+}
